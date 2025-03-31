@@ -6,7 +6,6 @@
 - Ubuntu Mate桌面環境
 - ROS Noetic完整桌面版
 - VSCodium代碼編輯器
-- Firefox瀏覽器
 - TigerVNC伺服器
 - noVNC網頁客戶端
 - Gazebo模擬器（僅支持amd64架構）
