@@ -1,0 +1,179 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+.env
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ROS
+devel/
+logs/
+build/
+bin/
+lib/
+msg_gen/
+srv_gen/
+msg/*Action.msg
+msg/*ActionFeedback.msg
+msg/*ActionGoal.msg
+msg/*ActionResult.msg
+msg/*Feedback.msg
+msg/*Goal.msg
+msg/*Result.msg
+msg/_*.py
+build_isolated/
+devel_isolated/
+install/
+install_isolated/
+.catkin_workspace
+.catkin_tools/
+.rosinstall
+.rosinstall.bak
+
+# Docker
+.docker/
+docker-compose.override.yml
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+.project
+.cproject
+.settings/
+.classpath
+.factorypath
+*.iml
+.ipynb_checkpoints
+
+# VSCode specific
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+.ionide/
+
+# Trae AI
+.trae/
+.trae-cache/
+.trae-history/
+.trae-logs/
+.trae-config.json
+
+# Google Drive
+.tmp.driveupload/
+.tmp.drivedownload/
+desktop.ini
+Icon
+Icon?
+.dropbox
+.dropbox.attr
+.dropbox.cache
+*.gdoc
+*.gsheet
+*.gslides
+*.gdraw
+.drive-status
+
+# OS specific
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Icon?
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ROS2 specific
+install/
+log/
+
+# Colcon specific
+build/
+install/
+log/
+
+# Compiled files
+*.o
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.app
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~.nib
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Bazel
+bazel-*
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+
+# Bag files
+*.bag
+*.bag.*
