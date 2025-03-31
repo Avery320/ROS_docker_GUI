@@ -18,6 +18,9 @@ echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/${USER}/.bashrc
 echo "source /home/${USER}/workspace/devel/setup.bash" >> /home/${USER}/.bashrc
 echo "cd /home/${USER}/workspace" >> /home/${USER}/.bashrc
 
+# 添加VSCodium别名
+echo 'alias code="/usr/bin/codium --no-sandbox --unity-launch"' >> /home/${USER}/.bashrc
+
 # 重新编译工作空间
 su - ${USER} -c "cd /home/${USER}/workspace && source /opt/ros/${ROS_DISTRO}/setup.bash && catkin_make"
 

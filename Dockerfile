@@ -81,6 +81,19 @@ RUN wget https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
     echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.asc ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
     | tee /etc/apt/sources.list.d/vscodium.list && \
     apt-get update -q && \
+    apt-get install -y codium libx11-xcb1 libxcb-dri3-0 libdrm2 libgbm1 libasound2 && \
+    apt-get autoclean && \
+    apt-get autoremove && \
+    rm -rf /var/lib/apt/lists/* && \
+    # 创建桌面快捷方式
+    mkdir -p /usr/share/applications && \
+    echo -e "[Desktop Entry]\nVersion=1.0\nName=VSCodium\nComment=Code Editing\nExec=/usr/bin/codium --no-sandbox --unity-launch %F\nIcon=vscodium\nType=Application\nTerminal=false\nCategories=Development;TextEditor;" > /usr/share/applications/codium.desktop
+
+RUN wget https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+    -O /usr/share/keyrings/vscodium-archive-keyring.asc && \
+    echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.asc ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
+    | tee /etc/apt/sources.list.d/vscodium.list && \
+    apt-get update -q && \
     apt-get install -y codium && \
     apt-get autoclean && \
     apt-get autoremove && \
@@ -127,7 +140,17 @@ RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
 # 創建用戶
 RUN useradd -m -s /bin/bash ${USER} && \
     echo "${USER}:${VNC_PASSWORD}" | chpasswd && \
-    adduser ${USER} sudo
+    adduser ${USER} sudo && \
+    # 确保VSCodium配置目录存在
+    mkdir -p /home/${USER}/.config/VSCodium && \
+    chown -R ${USER}:${USER} /home/${USER}/.config && \
+    # 创建桌面快捷方式
+    mkdir -p /home/${USER}/Desktop && \
+    cp /usr/share/applications/codium.desktop /home/${USER}/Desktop/ && \
+    chmod +x /home/${USER}/Desktop/codium.desktop && \
+    chown ${USER}:${USER} /home/${USER}/Desktop/codium.desktop && \
+    # 添加VSCodium别名到bashrc
+    echo 'alias code="/usr/bin/codium --no-sandbox --unity-launch"' >> /home/${USER}/.bashrc
 
 # 創建ROS工作空間
 RUN mkdir -p /home/${USER}/workspace/src && \
