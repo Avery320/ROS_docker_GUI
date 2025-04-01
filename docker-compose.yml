@@ -1,0 +1,19 @@
+version: '3'
+services:
+  ros:
+    image: ros-desktop
+    container_name: ROSdev
+    volumes:
+      - ROSdev:/home/ROS/workspace
+    ports:
+      - "5901:5901"
+      - "8080:8080"
+    environment:
+      - VNC_PASSWORD=ros000
+    # 确保容器不会自动退出
+    tty: true
+    stdin_open: true
+
+volumes:
+  ROSdev:
+    external: true

@@ -1,15 +1,21 @@
 # ROS Docker 桌面環境
 
-這是一個基於Ubuntu 20.04的ROS Noetic桌面環境，包含VNC和noVNC支持，可以通過瀏覽器訪問。
+這是一個基於Ubuntu 20.04的ROS Noetic桌面環境，包含VNC支持，可以通過瀏覽器訪問。
 
 ## 功能特性
+
+### 版本
 - Ubuntu Mate桌面環境
 - ROS Noetic完整桌面版
-- VSCodium代碼編輯器
-- TigerVNC伺服器
-- noVNC網頁客戶端
-- Gazebo模擬器（僅支持amd64架構）
-- 預配置的ROS工作空間
+
+### 功能 
+✅ VSCodium代碼編輯器
+✅ TigerVNC伺服器
+✅ 預配置的ROS工作空間
+
+### 開法與測試中
+🛠️noVNC網頁客戶端
+🛠️Gazebo模擬器（僅支持amd64架構）
 
 ## 執行
 
@@ -30,8 +36,6 @@ docker run -d \
 ### 3. 訪問桌面環境
 - 通過VNC客戶端：連接到 localhost:5901 ，密碼： ros000
 - 通過瀏覽器：訪問 http://localhost:8080/vnc.html
-
-
 
 
 ## 工作空間
@@ -71,4 +75,3 @@ docker run -d \
 - VNC端口：5901
 - noVNC端口：8080
 - ROS版本：Noetic
-

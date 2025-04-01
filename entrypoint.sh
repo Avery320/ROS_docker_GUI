@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# 创建用户如果不存在
+# 创建用户和组如果不存在
 if ! id ${USER} &>/dev/null; then
-    useradd -m -s /bin/bash ${USER}
+    groupadd ${USER}  # 确保组存在
+    useradd -m -s /bin/bash -g ${USER} ${USER}  # 创建用户并指定组
     echo "${USER}:${VNC_PASSWORD}" | chpasswd
     adduser ${USER} sudo
 fi
