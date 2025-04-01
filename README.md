@@ -17,9 +17,9 @@
 🛠️noVNC網頁客戶端
 🛠️Gazebo模擬器（僅支持amd64架構）
 
-## 執行
+## 1_執行
 
-### 1. 構建映像
+### 構建映像
 ```bash
 docker build -t ros-desktop .
 ```
@@ -32,6 +32,10 @@ docker run -d \
   --name LocalROS \
   ros-desktop
 ```
+
+### 2_使用 Docker Compose
+```bash
+docker-compose -f .devcontainer/docker-compose.yml up -d
 
 ### 3. 訪問桌面環境
 - 通過VNC客戶端：連接到 localhost:5901 ，密碼： ros000
