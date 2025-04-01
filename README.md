@@ -35,7 +35,8 @@ docker run -d \
 
 ### 2_使用 Docker Compose
 ```bash
-docker-compose -f .devcontainer/docker-compose.yml up -d
+docker-compose -f docker-compose.yml up -d
+```
 
 ### 3. 訪問桌面環境
 - 通過VNC客戶端：連接到 localhost:5901 ，密碼： ros000
