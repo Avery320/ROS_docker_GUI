@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# 在腳本開頭添加清理舊VNC進程的代碼
+vncserver -kill :1 &> /dev/null || true
+rm -rf /tmp/.X1-lock /tmp/.X11-unix/X1
+
 # 创建用户和组如果不存在
 if ! id ${USER} &>/dev/null; then
     groupadd ${USER}  # 确保组存在

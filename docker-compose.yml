@@ -3,11 +3,14 @@ services:
   ros:
     image: ros-desktop
     container_name: ROSdev
+    # 將外部的 ROSdev 卷掛載到容器的 /home/ROS/workspace 目錄
     volumes:
-      - ROSdev:/home/ROS/workspace
+      - ROSdev:/home/ROS/workspace 
     ports:
       - "5901:5901"
       - "8080:8080"
+    # 添加重啟策略
+    restart: unless-stopped
     environment:
       - VNC_PASSWORD=ros000
     # 确保容器不会自动退出
