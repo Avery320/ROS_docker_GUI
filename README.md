@@ -8,6 +8,7 @@
 ### 功能 
 ✅ VSCodium代碼編輯器
 ✅ noVNC網頁客戶端｜TigerVNC伺服器
+✅ reopen in container
 ✅ 預配置的ROS工作空間
 ### 開法與測試中
 🛠️Gazebo模擬器（僅支持amd64架構）
@@ -19,6 +20,9 @@ docker build -t ros-desktop .
 ```
 ### Docker Compose
 ```bash
+# 進入 docker_compose 目錄下的特定環境目錄
+cd docker_compose/[folder]
+# 啟動容器
 docker-compose -f docker-compose.yml up -d
 ```
 ### 訪問桌面環境
