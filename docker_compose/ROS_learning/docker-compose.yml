@@ -1,0 +1,23 @@
+services:
+  ros:
+    image: ros-desktop
+    container_name: ROS_learning
+    # 添加 user: root 設置
+    user: root
+    # 將外部的 ROSdev 卷掛載到容器的 /home/ROS/workspace 目錄
+    volumes:
+      - ROS_learning:/home/ROS/workspace 
+    ports:
+      - "5902:5902"
+      - "8081:8081"
+    # 添加重啟策略
+    restart: unless-stopped
+    environment:
+      - VNC_PASSWORD=ros000
+    # 确保容器不会自动退出
+    tty: true
+    stdin_open: true
+
+volumes:
+  ROS_learning:
+    external: true
