@@ -1,0 +1,35 @@
+version: '3'
+services:
+  ros:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ${CONTAINER_NAME}
+    # 添加 user: root 設置
+    user: root
+    # 將外部的 ROSdev 卷掛載到容器的 /home/ROS/workspace 目錄
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./workspace:/home/${USER}/workspace/src
+    ports:
+      - "${VNC_PORT}:${VNC_PORT}"
+      - "${NOVNC_PORT}:${NOVNC_PORT}"
+    # 添加重啟策略
+    restart: unless-stopped
+    environment:
+      - DISPLAY=host.docker.internal:0
+      - QT_X11_NO_MITSHM=1
+      - ROS_DISTRO=${ROS_DISTRO}
+      - USER=${USER}
+      - VNC_PORT=${VNC_PORT}
+      - NOVNC_PORT=${NOVNC_PORT}
+      - VNC_PASSWORD=${VNC_PASSWORD}
+    # 确保容器不会自动退出
+    tty: true
+    stdin_open: true
+    privileged: true
+    network_mode: host
+
+volumes:
+  initROS:
+    external: true
