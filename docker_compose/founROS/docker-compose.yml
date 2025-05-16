@@ -1,0 +1,24 @@
+version: '3'
+services:
+  ros:
+    image: ros-desktop
+    container_name: founROS
+    # 添加 user: root 設置
+    user: root
+    # 將外部的 ROSdev 卷掛載到容器的 /home/ROS/workspace 目錄
+    volumes:
+      - founROS:/home/ROS/workspace 
+    ports:
+      - "5905:5901"
+      - "8084:8080"
+    # 添加重啟策略
+    restart: unless-stopped
+    environment:
+      - VNC_PASSWORD=ros000
+    # 确保容器不会自动退出
+    tty: true
+    stdin_open: true
+
+volumes:
+  founROS:
+    external: true
