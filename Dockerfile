@@ -17,7 +17,7 @@
 
 FROM ubuntu:focal-20241011
 
-# 設置環境變量
+# 設定環境變數
 ENV DEBIAN_FRONTEND=noninteractive
 ENV ROS_DISTRO=noetic
 ENV USER=ROS
@@ -25,28 +25,28 @@ ENV VNC_PORT=5901
 ENV NOVNC_PORT=8080
 ENV CONTAINER_NAME=LocalROS
 
-# 使用ARG而不是ENV来设置密码
+# 使用 ARG 而非 ENV 來設定密碼
 ARG VNC_PASSWORD="ros000"
-# 在构建完成后设置环境变量
+# 在建置完成後設定環境變數
 ENV VNC_PASSWORD=${VNC_PASSWORD}
 
 ARG TARGETPLATFORM
 ARG INSTALL_PACKAGE=desktop
-# 移除密码参数
+# 移除密碼參數
 # ARG PASSWD=ros000
 
 LABEL maintainer="Tiryoh<tiryoh@gmail.com>"
 
 SHELL ["/bin/bash", "-c"]
 
-# Upgrade OS
+# 升級作業系統
 RUN apt-get update -q && \
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
     apt-get autoclean && \
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Ubuntu Mate desktop
+# 安裝 Ubuntu Mate 桌面環境
 RUN apt-get update -q && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
         ubuntu-mate-desktop && \
@@ -54,7 +54,7 @@ RUN apt-get update -q && \
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/*
 
-# Add Package
+# 新增套件
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
         tigervnc-standalone-server tigervnc-common \
@@ -65,17 +65,17 @@ RUN apt-get update && \
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/*
 
-# noVNC and Websockify
+# noVNC 和 Websockify
 RUN git clone https://github.com/AtsushiSaito/noVNC.git -b add_clipboard_support /usr/lib/novnc && \
     pip install --no-cache-dir git+https://github.com/novnc/websockify.git@v0.10.0 && \
     ln -s /usr/lib/novnc/vnc.html /usr/lib/novnc/index.html && \
     sed -i "s/UI.initSetting('resize', 'off');/UI.initSetting('resize', 'remote');/g" /usr/lib/novnc/app/ui.js
 
-# Disable auto update and crash report
+# 停用自動更新和錯誤報告
 RUN sed -i 's/Prompt=.*/Prompt=never/' /etc/update-manager/release-upgrades && \
     sed -i 's/enabled=1/enabled=0/g' /etc/default/apport
 
-# Install VSCodium
+# 安裝 VSCodium
 RUN wget https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
     -O /usr/share/keyrings/vscodium-archive-keyring.asc && \
     echo 'deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.asc ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main' \
@@ -85,7 +85,7 @@ RUN wget https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
     apt-get autoclean && \
     apt-get autoremove && \
     rm -rf /var/lib/apt/lists/* && \
-    # 创建桌面快捷方式
+    # 建立桌面捷徑
     mkdir -p /usr/share/applications && \
     echo -e "[Desktop Entry]\nVersion=1.0\nName=VSCodium\nComment=Code Editing\nExec=/usr/bin/codium --no-sandbox --unity-launch %F\nIcon=vscodium\nType=Application\nTerminal=false\nCategories=Development;TextEditor;" > /usr/share/applications/codium.desktop
 
@@ -128,7 +128,7 @@ RUN apt-get update -qq && \
     rm -rf /var/lib/apt/lists/*
 
 
-# 安裝 Gazebo (僅適用於 amd64)
+# 安裝 Gazebo（僅適用於 amd64）
 RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
     apt-get update -q && \
     apt-get install -y \
@@ -137,22 +137,22 @@ RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
     rm -rf /var/lib/apt/lists/*; \
     fi
 
-# 創建用戶
+# 建立使用者
 RUN useradd -m -s /bin/bash ${USER} && \
     echo "${USER}:${VNC_PASSWORD}" | chpasswd && \
     adduser ${USER} sudo && \
-    # 确保VSCodium配置目录存在
+    # 確保 VSCodium 設定目錄存在
     mkdir -p /home/${USER}/.config/VSCodium && \
     chown -R ${USER}:${USER} /home/${USER}/.config && \
-    # 创建桌面快捷方式
+    # 建立桌面捷徑
     mkdir -p /home/${USER}/Desktop && \
     cp /usr/share/applications/codium.desktop /home/${USER}/Desktop/ && \
     chmod +x /home/${USER}/Desktop/codium.desktop && \
     chown ${USER}:${USER} /home/${USER}/Desktop/codium.desktop && \
-    # 添加VSCodium别名到bashrc
+    # 新增 VSCodium 別名到 bashrc
     echo 'alias code="/usr/bin/codium --no-sandbox --unity-launch"' >> /home/${USER}/.bashrc
 
-# 創建ROS工作空間
+# 建立 ROS 工作空間
 RUN mkdir -p /home/${USER}/workspace/src && \
     chown -R ${USER}:${USER} /home/${USER}/workspace && \
     cd /home/${USER}/workspace && \
@@ -160,14 +160,14 @@ RUN mkdir -p /home/${USER}/workspace/src && \
     catkin_make && \
     echo 'source /home/${USER}/workspace/devel/setup.bash' >> /home/${USER}/.bashrc"
 
-# 複製本地工作空間文件到容器
+# 複製本地工作空間檔案到容器
 COPY ./workspace/ /home/${USER}/workspace/src/
 RUN chown -R ${USER}:${USER} /home/${USER}/workspace
 
-# Enable apt-get completion after running `apt-get update` in the container
+# 啟用 apt-get 自動完成功能
 RUN rm /etc/apt/apt.conf.d/docker-clean
 
 COPY ./entrypoint.sh /
 
-# 在entrypoint.sh中使用環境變量
+# 在 entrypoint.sh 中使用環境變數
 ENTRYPOINT [ "/bin/bash", "-c", "/entrypoint.sh" ]
