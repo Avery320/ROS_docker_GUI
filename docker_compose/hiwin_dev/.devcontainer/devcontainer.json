@@ -3,19 +3,20 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "ros",
   "workspaceFolder": "/home/ROS/workspace",
-  // 由於 docker-compose.yml 已設定 user: root，此處可以移除
-  // "remoteUser": "root",
-  "customizations": {
-    "vscode": {
-      "settings": {
-        "terminal.integrated.defaultProfile.linux": "bash"
-      },
-      "extensions": [
-        "ms-vscode.cpptools",
-        "ms-python.python",
-        "ms-azuretools.vscode-docker",
-        "ms-iot.vscode-ros"
-      ]
-    }
-  }
+  "remoteUser": "ROS",
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "bash"
+  },
+  "extensions": [
+    "ms-vscode.cpptools",
+    "ms-python.python",
+    "ms-azuretools.vscode-docker",
+    "ms-iot.vscode-ros"
+  ],
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/home/ROS/workspace,type=bind,consistency=cached"
+  ],
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/ROS/workspace,type=bind,consistency=cached",
+  "workspaceFolder": "/home/ROS/workspace",
+  "postCreateCommand": "sudo chown -R ROS:ROS /home/ROS/workspace"
 }

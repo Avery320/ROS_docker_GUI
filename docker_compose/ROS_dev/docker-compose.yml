@@ -2,6 +2,7 @@ version: '3'
 services:
   ros:
     image: ros-desktop
+    platform: linux/amd64
     container_name: ROSdev
     # 添加 user: root 設置
     user: root
