@@ -8,7 +8,7 @@ git clone https://github.com/Avery320/ROS_docker_GUI.git
 ```
 ### 構建映像
 ```bash
-docker build -t ros-desktop .
+docker build -t hiwinros_dev .
 ```
 ### Docker Compose
 ```bash
