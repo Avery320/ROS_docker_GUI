@@ -1,20 +1,22 @@
+# Docker Compose 版本
 version: '3'
 services:
+  # ROS 開發環境服務
   ros:
     image: hiwinros-dev
-    container_name: ${CONTAINER_NAME}
+    container_name: ${NAME}
     user: root
     volumes:
-      - ${VOLUME_NAME}:/home/ROS/workspace 
+      - ${NAME}:/home/ROS/workspace 
     ports:
-      - "5905:5901"
-      - "8084:8080"
+      - "${VNC_PORT}:5901"
+      - "${WEB_PORT}:8080"
     restart: unless-stopped
     environment:
-      - VNC_PASSWORD=ros000
+      - VNC_PASSWORD=${VNC_PASSWORD}
     tty: true
     stdin_open: true
 
 volumes:
-  ${VOLUME_NAME}:
+  hiwinros_dev:
     external: true
