@@ -1,25 +1,20 @@
 version: '3'
 services:
   ros:
-    image: hiwinros_dev
-    platform: linux/amd64
-    container_name: dev
-    # 添加 user: root 設置
+    image: hiwinros-dev
+    container_name: ${CONTAINER_NAME}
     user: root
-    # 將外部的 ROSdev 卷掛載到容器的 /home/ROS/workspace 目錄
     volumes:
-      - dev:/home/ROS/workspace 
+      - ${VOLUME_NAME}:/home/ROS/workspace 
     ports:
-      - "5800:5800"
-      - "5050:5050"
-    # 添加重啟策略
+      - "5905:5901"
+      - "8084:8080"
     restart: unless-stopped
     environment:
       - VNC_PASSWORD=ros000
-    # 确保容器不会自动退出
     tty: true
     stdin_open: true
 
 volumes:
-  dev:
+  ${VOLUME_NAME}:
     external: true
