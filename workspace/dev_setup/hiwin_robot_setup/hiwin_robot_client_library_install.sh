@@ -14,16 +14,20 @@ set -euo pipefail
 # 3. 執行腳本：./hiwin_robot_client_library_install.sh
 # =============================================
 # 說明：
-# - 自動安裝 HIWIN Robot Client Library
-# - 編譯並安裝到系統
+# - 此腳本用於安裝 HIWIN Robot Client Library
+# - 安裝位置：
+#   - 源碼：${WORKSPACE_PATH}/hiwin_robot_client_library
+#   - 編譯後檔案：${WORKSPACE_PATH}/install
+# - 此腳本位於 dev_setup 目錄，但不會影響 ROS 工作空間結構
 # =============================================
 
 #--------------------------------------------------
 # 變數設定
 REPO_URL="https://github.com/HIWINCorporation/hiwin_robot_client_library.git"
-CLONE_DIR="hiwin_robot_client_library"
+WORKSPACE_PATH="/home/ROS/workspace"  # ROS 工作空間根目錄
+CLONE_DIR="${WORKSPACE_PATH}/hiwin_robot_client_library"  # 源碼安裝目錄
 BUILD_DIR="build"
-INSTALL_PREFIX="/usr/local"
+INSTALL_PREFIX="${WORKSPACE_PATH}/install"  # 編譯後檔案安裝目錄
 #--------------------------------------------------
 
 echo "🔄 更新套件清單並安裝必要套件..."
@@ -33,7 +37,13 @@ sudo apt install -y git cmake build-essential || {
     exit 1
 }
 
-echo "📥 正在 clone 專案：$REPO_URL ..."
+# 檢查 ROS 工作空間是否存在
+if [ ! -d "$WORKSPACE_PATH" ]; then
+    echo "❌ ROS 工作空間 ${WORKSPACE_PATH} 不存在"
+    exit 1
+fi
+
+echo "📥 正在 clone 專案到 ROS 工作空間：$REPO_URL ..."
 git clone "$REPO_URL" "$CLONE_DIR" || {
     echo "❌ 克隆專案失敗"
     exit 1
@@ -54,17 +64,16 @@ make -j"$(nproc)" || {
     exit 1
 }
 
-echo "🚀 安裝到：$INSTALL_PREFIX"
-sudo make install || {
+echo "🚀 安裝到 ROS 工作空間：$INSTALL_PREFIX"
+make install || {
     echo "❌ 安裝失敗"
     exit 1
 }
 
-# 更新共享庫快取
-echo "🔄 更新共享庫快取..."
-sudo ldconfig || {
-    echo "❌ 更新共享庫快取失敗"
-    exit 1
-}
+# 更新環境變數
+echo "🔄 更新環境變數..."
+echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:${INSTALL_PREFIX}/lib" >> ~/.bashrc
+echo "export PKG_CONFIG_PATH=\$PKG_CONFIG_PATH:${INSTALL_PREFIX}/lib/pkgconfig" >> ~/.bashrc
 
 echo "✅ 安裝完成！"
+echo "請重新開啟終端機或執行 'source ~/.bashrc' 來更新環境變數"
