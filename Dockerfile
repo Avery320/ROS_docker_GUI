@@ -146,7 +146,8 @@ RUN mkdir -p /home/${USER}/workspace/src && \
     echo 'source /home/${USER}/workspace/devel/setup.bash' >> /home/${USER}/.bashrc"
 
 # 複製本地工作空間檔案到容器
-COPY ./workspace/ /home/${USER}/workspace/src/
+COPY ./workspace/src/ /home/${USER}/workspace/src/
+COPY ./workspace/dev_setup/ /home/${USER}/workspace/dev_setup/
 RUN chown -R ${USER}:${USER} /home/${USER}/workspace
 
 # 啟用 apt-get 自動完成功能
