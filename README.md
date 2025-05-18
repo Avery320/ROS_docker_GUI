@@ -1,22 +1,30 @@
-# ROS Docker Version1.0
-這是一個基於Ubuntu 20.04的ROS Noetic桌面環境，包含VNC支持，可以通過瀏覽器訪問。
+# ROS Docker Version2.0
+開發中~
 ---
 ## 執行
-### git clone 
+### Git clone 
 ```bash
 git clone https://github.com/Avery320/ROS_docker_GUI.git
 ```
-### 構建映像
+### Docker Build
 ```bash
 docker build -t hiwinros_dev .
 ```
 ### Docker Compose
+本專案使用`docker compose`的方式管理容器。
 ```bash
-cd docker_compose/[folder] # 進入 docker_compose 目錄下的特定環境目錄
+cd docker_compose/dev # 進入 docker_compose 目錄中的 dev 資料夾
 ```
 ```bash
 docker-compose -f docker-compose.yml up -d # 啟動容器
 ```
+- 透過`.env`管理容器的設定檔。
+- 使用`.devcontariner`允許開發者可以透過 IDE 的 `reopen to container` 的方式進入容器。
+
+## NVC/noNVC
+- 通過VNC客戶端：連接到 localhost:5901 ，默認密碼： ros000
+- 通過瀏覽器：訪問 http://localhost:8080/vnc.html
+
 ---
 ## 核心工具套件
 - 系統工具：
@@ -29,7 +37,7 @@ docker-compose -f docker-compose.yml up -d # 啟動容器
   - `build-essential`, `vim`, `lsb-release`
   - `locales`, `bash-completion`, `tzdata`
   - `terminator`
----
+
 ## ROS 相關套件
 - 核心套件：
   - `ros-${ROS_DISTRO}-desktop`
@@ -50,25 +58,8 @@ docker-compose -f docker-compose.yml up -d # 啟動容器
   - `ros-${ROS_DISTRO}-ros-ign-gazebo`
 
 
-## 支援
-- ✅ VSCodium代碼編輯器
-- ✅ noVNC 網頁客戶端        
-- ✅ reopen in container
+## Workspace
+容器內已預先配置好ROS工作空間，位於`/home/ROS/workspace/`。
+目前添加作者所需的開發腳本 Hiwin robot dependencies 於`workspace/dev_setup/hiwin_robot_setup`。
+您可以添加自己的ROS包於`/home/ROS/workspace/`。
 
-### 訪問桌面環境
-- 通過VNC客戶端：連接到 localhost:5901 ，默認密碼： ros000
-- 通過瀏覽器：訪問 http://localhost:8080/vnc.html
-
-## 工作空間
-容器內已預先配置好ROS工作空間，位於 /home/ROS/workspace/ 。
-您可以通過以下方式添加自己的ROS包：
-1. 在本地 ./workspace/ 目錄中添加文件，這些文件會被複製到容器的工作空間中
-2. 直接在容器內的工作空間中創建或修改文件。
-
-## 預設配置
-- ROS_DISTRO=noetic
-- USER=ROS 
-- PASSWORD=ROS000
-- VNC_PORT=5901
-- NOVNC_PORT=8080
-- CONTAINER_NAME=LocalROS
