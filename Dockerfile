@@ -156,3 +156,6 @@ COPY ./entrypoint.sh /
 
 # 在 entrypoint.sh 中使用環境變數
 ENTRYPOINT [ "/bin/bash", "-c", "/entrypoint.sh" ]
+
+
+# test 
