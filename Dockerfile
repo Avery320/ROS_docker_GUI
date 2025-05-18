@@ -1,41 +1,27 @@
-# Copyright 2020-2024 Tiryoh<tiryoh@gmail.com>
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-# This Dockerfile is based on https://github.com/AtsushiSaito/docker-ubuntu-sweb
-# which is released under the Apache-2.0 license.
-
 FROM ubuntu:focal-20241011
+
+# 使用 ARG 來設定參數
+ARG CONTAINER_NAME=hiwinros_dev
+ARG VNC_PASSWORD=ros000
+ARG ROS_DISTRO=noetic
+ARG USER=ROS
+ARG VNC_PORT=5901
+ARG NOVNC_PORT=8080
+ARG INSTALL_PACKAGE=desktop
+
+# 將 ARG 轉換為 ENV
+ENV CONTAINER_NAME=${CONTAINER_NAME}
+ENV VNC_PASSWORD=${VNC_PASSWORD}
+ENV ROS_DISTRO=${ROS_DISTRO}
+ENV USER=${USER}
+ENV VNC_PORT=${VNC_PORT}
+ENV NOVNC_PORT=${NOVNC_PORT}
+ENV INSTALL_PACKAGE=${INSTALL_PACKAGE}
 
 # 設定環境變數
 ENV DEBIAN_FRONTEND=noninteractive
-ENV ROS_DISTRO=noetic
-ENV USER=ROS
-ENV VNC_PORT=5901
-ENV NOVNC_PORT=8080
-ENV CONTAINER_NAME=LocalROS
 
-# 使用 ARG 而非 ENV 來設定密碼
-ARG VNC_PASSWORD="ros000"
-# 在建置完成後設定環境變數
-ENV VNC_PASSWORD=${VNC_PASSWORD}
-
-ARG TARGETPLATFORM
-ARG INSTALL_PACKAGE=desktop
-# 移除密碼參數
-# ARG PASSWD=ros000
-
-LABEL maintainer="Tiryoh<tiryoh@gmail.com>"
+LABEL maintainer="n76124052@gs.ncku.edu.tw"
 
 SHELL ["/bin/bash", "-c"]
 
@@ -52,7 +38,7 @@ RUN apt-get update -q && \
         ubuntu-mate-desktop && \
     apt-get autoclean && \
     apt-get autoremove && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*ㄌ
 
 # 新增套件
 RUN apt-get update && \
@@ -114,28 +100,27 @@ RUN apt-get update -qq && \
       python3-osrf-pycommon \
       python3-argcomplete \
       python3-rosdep \
-      python3-vcstool \
-      ros-${ROS_DISTRO}-industrial-robot-client \
-      ros-${ROS_DISTRO}-industrial-robot-simulator \
-      ros-${ROS_DISTRO}-controller-manager \
-      ros-${ROS_DISTRO}-joint-state-controller \
-      ros-${ROS_DISTRO}-robot-state-publisher \
-      ros-${ROS_DISTRO}-joint-trajectory-controller \
-      ros-${ROS_DISTRO}-moveit \
-      ros-${ROS_DISTRO}-rviz && \
+      python3-vcstool && \
     rosdep init && \
     rosdep update && \
     rm -rf /var/lib/apt/lists/*
 
-
-# 安裝 Gazebo（僅適用於 amd64）
-RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
-    apt-get update -q && \
+# 安裝 Gazebo（使用模擬器）
+RUN apt-get update -q && \
     apt-get install -y \
     ros-${ROS_DISTRO}-gazebo-ros-pkgs \
-    ros-${ROS_DISTRO}-ros-ign-gazebo && \
-    rm -rf /var/lib/apt/lists/*; \
-    fi
+    ros-${ROS_DISTRO}-gazebo-ros-control \
+    ros-${ROS_DISTRO}-gazebo-plugins \
+    ros-${ROS_DISTRO}-gazebo-msgs \
+    ros-${ROS_DISTRO}-gazebo-dev \
+    ros-${ROS_DISTRO}-gazebo-ros \
+    ros-${ROS_DISTRO}-gazebo-ros-pkgs \
+    ros-${ROS_DISTRO}-gazebo-ros-control \
+    ros-${ROS_DISTRO}-gazebo-plugins \
+    ros-${ROS_DISTRO}-gazebo-msgs \
+    ros-${ROS_DISTRO}-gazebo-dev \
+    ros-${ROS_DISTRO}-gazebo-ros && \
+    rm -rf /var/lib/apt/lists/*
 
 # 建立使用者
 RUN useradd -m -s /bin/bash ${USER} && \
