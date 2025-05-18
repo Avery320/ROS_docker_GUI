@@ -21,7 +21,7 @@ docker-compose -f docker-compose.yml up -d # 啟動容器
 - 透過`.env`管理容器的設定檔。
 - 使用`.devcontariner`允許開發者可以透過 IDE 的 `reopen to container` 的方式進入容器。
 
-## NVC/noNVC
+## VNC/noVNC
 - 通過VNC客戶端：連接到 localhost:5901 ，默認密碼： ros000
 - 通過瀏覽器：訪問 http://localhost:8080/vnc.html
 
