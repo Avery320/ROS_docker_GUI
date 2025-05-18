@@ -1,17 +1,17 @@
 version: '3'
 services:
   ros:
-    image: ros-desktop
+    image: hiwinros_dev
     platform: linux/amd64
-    container_name: initROS
+    container_name: dev
     # 添加 user: root 設置
     user: root
     # 將外部的 ROSdev 卷掛載到容器的 /home/ROS/workspace 目錄
     volumes:
-      - initROS:/home/ROS/workspace 
+      - dev:/home/ROS/workspace 
     ports:
-      - "5902:5901"
-      - "8081:8080"
+      - "5800:5800"
+      - "5050:5050"
     # 添加重啟策略
     restart: unless-stopped
     environment:
@@ -21,5 +21,5 @@ services:
     stdin_open: true
 
 volumes:
-  initROS:
+  dev:
     external: true

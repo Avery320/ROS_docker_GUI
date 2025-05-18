@@ -1,5 +1,5 @@
 {
-    "name": "ROS_test",
+    "name": "dev",
     "dockerComposeFile": "../docker-compose.yml",
     "service": "ros",
     "workspaceFolder": "/home/ROS/workspace",
