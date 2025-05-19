@@ -24,7 +24,6 @@ docker-compose -f docker-compose.yml up -d # 啟動容器
 ## VNC/noVNC
 - 通過VNC客戶端：連接到 localhost:5901 ，默認密碼： ros000
 - 通過瀏覽器：訪問 http://localhost:8080/vnc.html
-
 ---
 ## 核心工具套件
 - 系統工具：
