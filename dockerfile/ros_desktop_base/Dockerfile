@@ -23,6 +23,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 SHELL ["/bin/bash", "-c"]
 
+# 建立使用者
+RUN useradd -m -s /bin/bash ${USER} && \
+    echo "${USER}:${VNC_PASSWORD}" | chpasswd && \
+    adduser ${USER} sudo
+
 # 更新系統並安裝所有必要的套件
 RUN apt-get update -q && \
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
@@ -64,11 +69,6 @@ RUN wget https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
     chmod +x /home/${USER}/Desktop/codium.desktop && \
     chown ${USER}:${USER} /home/${USER}/Desktop/codium.desktop && \
     echo 'alias code="/usr/bin/codium --no-sandbox --unity-launch"' >> /home/${USER}/.bashrc
-
-# 建立使用者
-RUN useradd -m -s /bin/bash ${USER} && \
-    echo "${USER}:${VNC_PASSWORD}" | chpasswd && \
-    adduser ${USER} sudo
 
 # 停用自動更新和錯誤報告
 RUN sed -i 's/Prompt=.*/Prompt=never/' /etc/update-manager/release-upgrades && \

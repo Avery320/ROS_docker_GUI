@@ -46,20 +46,19 @@ RUN apt-get update -q && \
     rm -rf /var/lib/apt/lists/*
 
 # 建立 ROS 工作空間
-RUN mkdir -p /home/${USER}/workspace/src && \
-    chown -R ${USER}:${USER} /home/${USER}/workspace && \
+RUN mkdir -p /home/${USER}/workspace && \
+    chown -R ${USER}:${USER} /home/${USER}/workspace
+
+# 複製工作空間檔案
+COPY workspace/ /home/${USER}/workspace/
+RUN chown -R ${USER}:${USER} /home/${USER}/workspace && \
     cd /home/${USER}/workspace && \
     /bin/bash -c "source /opt/ros/${ROS_DISTRO}/setup.bash && \
     catkin_make && \
     echo 'source /home/${USER}/workspace/devel/setup.bash' >> /home/${USER}/.bashrc"
 
-# 複製本地工作空間檔案
-COPY ./workspace/src/ /home/${USER}/workspace/src/
-COPY ./workspace/dev_setup/ /home/${USER}/workspace/dev_setup/
-RUN chown -R ${USER}:${USER} /home/${USER}/workspace
-
 # 啟用 apt-get 自動完成功能
 RUN rm /etc/apt/apt.conf.d/docker-clean
 
-COPY ./entrypoint.sh /
+COPY dockerfile/ros_base_pkg/entrypoint.sh /
 ENTRYPOINT [ "/bin/bash", "-c", "/entrypoint.sh" ] 
