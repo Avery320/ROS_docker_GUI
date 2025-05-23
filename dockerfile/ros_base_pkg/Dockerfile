@@ -46,11 +46,13 @@ RUN apt-get update -q && \
     rm -rf /var/lib/apt/lists/*
 
 # 建立 ROS 工作空間
-RUN mkdir -p /home/${USER}/workspace && \
+RUN mkdir -p /home/${USER}/workspace/src && \
+    mkdir -p /home/${USER}/workspace/dev_setup && \
     chown -R ${USER}:${USER} /home/${USER}/workspace
 
 # 複製工作空間檔案
-COPY workspace/ /home/${USER}/workspace/
+COPY workspace/src/ /home/${USER}/workspace/src/
+COPY workspace/dev_setup/ /home/${USER}/workspace/dev_setup/
 RUN chown -R ${USER}:${USER} /home/${USER}/workspace && \
     cd /home/${USER}/workspace && \
     /bin/bash -c "source /opt/ros/${ROS_DISTRO}/setup.bash && \
