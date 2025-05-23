@@ -30,10 +30,10 @@ echo 'alias code="/usr/bin/codium --no-sandbox --unity-launch"' >> /home/${USER}
 su - ${USER} -c "cd /home/${USER}/workspace && source /opt/ros/${ROS_DISTRO}/setup.bash && catkin_make"
 
 # 啟動 VNC 伺服器，使用密碼
-su - ${USER} -c "vncserver :1 -geometry 1280x800 -depth 24 -localhost no"
+su - ${USER} -c "vncserver :1 -geometry 1920x1080 -depth 24 -localhost no"
 
 # 啟動 noVNC，使用環境變數中的連接埠
-websockify -D --web=/usr/lib/novnc ${NOVNC_PORT} localhost:${VNC_PORT}
+/usr/lib/novnc/utils/novnc_proxy --vnc localhost:${VNC_PORT} --listen ${NOVNC_PORT} &
 
 # 輸出存取資訊
 echo "========================================================"
