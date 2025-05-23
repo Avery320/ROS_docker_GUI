@@ -2,7 +2,7 @@ FROM ros_desktop_base:latest
 
 # 設定預設的映像名稱
 LABEL maintainer="n76124052@gs.ncku.edu.tw"
-LABEL org.opencontainers.image.title="test_dev"
+LABEL org.opencontainers.image.title="ros_base_pkg"
 LABEL org.opencontainers.image.description="ROS Development Image"
 LABEL org.opencontainers.image.version="1.0"
 
