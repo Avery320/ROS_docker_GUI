@@ -4,7 +4,7 @@ set -euo pipefail
 # =============================================
 # HIWIN Robot Client Library 安裝腳本
 # 版本：1.0.0
-# 最後更新：2025-05-14
+# 最後更新：2025-05-24
 # 來源：https://github.com/HIWINCorporation/hiwin_robot_client_library
 # 作者：Cheng-En Tsai
 # =============================================
@@ -17,7 +17,7 @@ set -euo pipefail
 # - 此腳本用於安裝 HIWIN Robot Client Library
 # - 安裝位置：
 #   - 源碼：${WORKSPACE_PATH}/hiwin_robot_client_library
-#   - 編譯後檔案：${WORKSPACE_PATH}/install
+#   - 編譯後檔案：${WORKSPACE_PATH}/devel
 # - 此腳本位於 dev_setup 目錄，但不會影響 ROS 工作空間結構
 # =============================================
 
@@ -27,7 +27,7 @@ REPO_URL="https://github.com/HIWINCorporation/hiwin_robot_client_library.git"
 WORKSPACE_PATH="/home/ROS/workspace"  # ROS 工作空間根目錄
 CLONE_DIR="${WORKSPACE_PATH}/hiwin_robot_client_library"  # 源碼安裝目錄
 BUILD_DIR="build"
-INSTALL_PREFIX="${WORKSPACE_PATH}/install"  # 編譯後檔案安裝目錄
+INSTALL_PREFIX="${WORKSPACE_PATH}/devel"  # 編譯後檔案安裝目錄
 #--------------------------------------------------
 
 echo "🔄 更新套件清單並安裝必要套件..."
