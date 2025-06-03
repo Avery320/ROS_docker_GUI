@@ -1,4 +1,7 @@
 # ROS Docker Version1.0
+![Docker](https://img.shields.io/badge/Docker-blue?logo=docker)
+![ROS](https://img.shields.io/badge/ROS-Noetic-blueviolet?logo=ros)
+
 這是一個基於Ubuntu 20.04的ROS Noetic桌面環境，包含VNC支持，可以通過瀏覽器訪問。
 ---
 ## 執行
