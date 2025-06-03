@@ -1,4 +1,7 @@
 # ROS Docker Version2.0
+![Docker](https://img.shields.io/badge/Docker-blue?logo=docker)
+![ROS](https://img.shields.io/badge/ROS-Noetic-blueviolet?logo=ros)
+
 開發中~
 ---
 ## 執行
