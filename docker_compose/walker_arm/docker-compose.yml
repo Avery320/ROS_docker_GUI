@@ -1,0 +1,22 @@
+# Docker Compose 版本
+version: '3'
+services:
+  # ROS 開發環境服務
+  ros:
+    image: ros-desktop:latest
+    container_name: ${NAME}
+    user: root
+    volumes:
+      - ${NAME}:/home/ROS/workspace 
+    ports:
+      - "${VNC_PORT}:5901"
+      - "${WEB_PORT}:8080"
+    restart: unless-stopped
+    environment:
+      - VNC_PASSWORD=${VNC_PASSWORD}
+    tty: true
+    stdin_open: true
+
+volumes:
+  walker_arm:
+    external: true
