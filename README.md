@@ -25,40 +25,38 @@ docker-compose -f docker-compose.yml up -d # 啟動容器
 - 使用`.devcontariner`允許開發者可以透過 IDE 的 `reopen to container` 的方式進入容器。
 
 ## VNC/noVNC
-- 通過VNC客戶端：連接到 localhost:5901 ，默認密碼： ros000
-- 通過瀏覽器：訪問 http://localhost:8080/vnc.html
+- VNC客戶端：localhost:5901 (密碼：ros000)
+- 瀏覽器：http://localhost:8080/vnc.html
 ---
-## 核心工具套件
-- 系統工具：
-  - `tigervnc-standalone-server`
-  - `tigervnc-common`
-  - `supervisor`
-  - `wget`, `curl`
-  - `gosu`, `git`, `sudo`
-  - `python3-pip`, `tini`
-  - `build-essential`, `vim`, `lsb-release`
-  - `locales`, `bash-completion`, `tzdata`
-  - `terminator`
+## 系統套件 (ros_desktop_base)
+### 桌面環境
+- `ubuntu-mate-desktop` - Ubuntu MATE 桌面環境
+- `tigervnc-standalone-server` - VNC 伺服器
+- `noVNC` - 網頁版 VNC 客戶端
+- `supervisor` - 進程管理工具
 
-## ROS 相關套件
-- 核心套件：
-  - `ros-${ROS_DISTRO}-desktop`
-  - `python3-rosinstall`, `python3-rosinstall-generator`
-  - `python3-wstool`, `python3-catkin-tools`
-  - `python3-osrf-pycommon`, `python3-argcomplete`
-  - `python3-rosdep`, `python3-vcstool`
-- 工業機器人：
-  - `ros-${ROS_DISTRO}-industrial-robot-client`
-  - `ros-${ROS_DISTRO}-industrial-robot-simulator`
-  - `ros-${ROS_DISTRO}-controller-manager`
-  - `ros-${ROS_DISTRO}-joint-state-controller`
-  - `ros-${ROS_DISTRO}-robot-state-publisher`
-  - `ros-${ROS_DISTRO}-joint-trajectory-controller`
-  - `ros-${ROS_DISTRO}-moveit`
-  - `ros-${ROS_DISTRO}-rviz`
-  - `ros-${ROS_DISTRO}-gazebo-ros-pkgs`
-  - `ros-${ROS_DISTRO}-ros-ign-gazebo`
+### 開發工具
+- `vscodium` - 開源版 VS Code
+- `build-essential` - 編譯工具
+- `vim`, `git`, `sudo` - 基本工具
+- `python3-pip` - Python 套件管理
+- `tini`, `gosu` - 容器管理工具
+- `wget`, `curl` - 網路工具
+- `terminator` - 終端機
 
+## ROS 套件 (ros_core)
+### ROS 核心
+- `ros-noetic-desktop` - ROS 桌面版本，包含基本開發工具
+- `python3-ros*` - ROS 開發工具集（安裝、依賴管理、工作空間工具等）
+- `rosdep` - ROS 套件依賴管理工具
+
+### Gazebo 模擬器
+- `ros-noetic-gazebo-ros-pkgs` - Gazebo ROS 整合套件
+- `ros-noetic-gazebo-ros-control` - Gazebo 控制介面
+- `ros-noetic-gazebo-plugins` - Gazebo 插件集
+- `ros-noetic-gazebo-msgs` - Gazebo 訊息定義
+- `ros-noetic-gazebo-dev` - Gazebo 開發工具
+- `ros-noetic-gazebo-ros` - Gazebo ROS 介面
 
 ## Workspace
 容器內已預先配置好ROS工作空間，位於`/home/ROS/workspace/`。

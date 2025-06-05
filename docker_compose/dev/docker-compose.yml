@@ -3,7 +3,7 @@ version: '3'
 services:
   # ROS 開發環境服務
   ros:
-    image: hiwinros-dev
+    image: ros_base_pkg
     container_name: ${NAME}
     user: root
     volumes:
@@ -18,5 +18,5 @@ services:
     stdin_open: true
 
 volumes:
-  hiwinros_dev:
+  dev:
     external: true
