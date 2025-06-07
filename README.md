@@ -1,22 +1,29 @@
 # ROS Docker Version2.0
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Docker](https://img.shields.io/badge/Docker-g?logo=docker)](https://www.docker.com)
+[![Docker](https://img.shields.io/badge/Docker-?logo=docker)](https://www.docker.com)
 [![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-orange?logo=ubuntu)](https://releases.ubuntu.com/20.04/)
 [![ROS](https://img.shields.io/badge/ROS-Noetic-blueviolet?logo=ros)](http://wiki.ros.org/noetic)
 [![VNC](https://img.shields.io/badge/VNC-Enabled-green?logo=vnc)](https://www.tigervnc.org/)
 
-開發中~
----
+## 專案簡介
+這是一個基於 Docker 的 ROS（Robot Operating System）開發環境，專為機器人開發者設計。本專案整合了 ROS Noetic、Ubuntu 20.04 和完整的桌面環境，提供了一個即用型的開發平台。主要特點包括：
+
+- 🐳 基於 Docker 的容器化環境，確保開發環境的一致性和可移植性
+- 🖥️ 整合 VNC/noVNC 服務，支援圖形化介面操作
+- 🔧 預裝完整的 ROS 開發工具和 Hiwin 機器人相關依賴套件
+- 🛠️ 支援 VSCode 遠端開發
+- 🔄 使用 Docker Compose 進行容器管理
+
 ## 執行
-### Git clone 
+#### Git clone 
 ```bash
 git clone https://github.com/Avery320/ROS_docker_GUI.git
 ```
-### Docker Build
+#### Docker Build
 ```bash
 docker build -t hiwinros_dev .
 ```
-### Docker Compose
+#### Docker Compose
 本專案使用`docker compose`的方式管理容器。
 ```bash
 cd docker_compose/dev # 進入 docker_compose 目錄中的 dev 資料夾
@@ -62,8 +69,8 @@ docker-compose -f docker-compose.yml up -d # 啟動容器
 - `ros-noetic-gazebo-ros` - Gazebo ROS 介面
 
 ## Workspace
-容器內已預先配置好ROS工作空間，位於`/home/ROS/workspace/`。
-目前添加作者所需的開發腳本 Hiwin robot dependencies 於`workspace/dev_setup/hiwin_robot_setup`。
+- 容器內已預先配置好ROS工作空間，位於`/home/ROS/workspace/`。
+- 目前添加作者所需的開發腳本 Hiwin robot dependencies 於`workspace/dev_setup/hiwin_robot_setup`。
 您可以添加自己的ROS包於`/home/ROS/workspace/`。
 
 ## 授權條款
