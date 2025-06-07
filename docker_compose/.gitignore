@@ -1,8 +1,9 @@
 # 忽略所有內容
 *
 
-# 不忽略 sample 資料夾
+# 不忽略 sample 資料夾及其內容
 !sample/
+!sample/**
 
 # 不忽略 .env 檔案
 !.env
