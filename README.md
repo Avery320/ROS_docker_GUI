@@ -1,6 +1,9 @@
 # ROS Docker Version2.0
-[![Docker](https://img.shields.io/badge/Docker-blue?logo=docker)](https://www.docker.com)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Docker](https://img.shields.io/badge/Docker-g?logo=docker)](https://www.docker.com)
+[![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-orange?logo=ubuntu)](https://releases.ubuntu.com/20.04/)
 [![ROS](https://img.shields.io/badge/ROS-Noetic-blueviolet?logo=ros)](http://wiki.ros.org/noetic)
+[![VNC](https://img.shields.io/badge/VNC-Enabled-green?logo=vnc)](https://www.tigervnc.org/)
 
 開發中~
 ---
@@ -62,4 +65,8 @@ docker-compose -f docker-compose.yml up -d # 啟動容器
 容器內已預先配置好ROS工作空間，位於`/home/ROS/workspace/`。
 目前添加作者所需的開發腳本 Hiwin robot dependencies 於`workspace/dev_setup/hiwin_robot_setup`。
 您可以添加自己的ROS包於`/home/ROS/workspace/`。
+
+## 授權條款
+
+本專案採用 GNU General Public License v3.0 授權條款。詳情請參閱 [LICENSE](LICENSE) 檔案。
 
