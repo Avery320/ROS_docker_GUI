@@ -1,0 +1,15 @@
+# 忽略所有內容
+*
+
+# 不忽略 sample 資料夾及其內容
+!sample/
+!sample/**
+
+# 不忽略 .env 檔案
+!.env
+
+# 不忽略 README.md 檔案
+!README.md
+
+# 不忽略 .gitignore 文件本身
+!.gitignore 
