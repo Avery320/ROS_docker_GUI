@@ -1,7 +1,6 @@
 # ROS Docker 開發環境
 
-這個'docker-compose'會透過資料夾名稱建立 'Continers' ，在建立之前需在 docker 中預先設置 'Volumes' 與在 '.env' 文件中配置相關參數。
-
+這個`docker-compose`會透過資料夾名稱建立 `Continers`，在建立之前需在 `docker` 中預先設置 `Volumes` 與在 `.env` 文件中配置相關參數。
 
 ## Containers 設定說明
 容器名稱設定將會與資料夾名稱相同，預設為`docker_compose/<name>`。
@@ -14,7 +13,7 @@
    ```bash
    docker volume create 'sample'
    ```
-3. 修改 docker-compose.ymal 文件中'volumes 的配置
+3. 修改 docker-compose.ymal 文件中 `volumes` 的配置
 ```yaml
   volumes:
     sample: # 手動修正 volumes 名稱與設置名稱相同

@@ -8,5 +8,8 @@
 # 不忽略 .env 檔案
 !.env
 
+# 不忽略 README.md 檔案
+!README.md
+
 # 不忽略 .gitignore 文件本身
 !.gitignore 
