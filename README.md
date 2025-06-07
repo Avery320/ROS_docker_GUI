@@ -14,38 +14,36 @@
 - 🛠️ 支援 VSCode 遠端開發
 - 🔄 使用 Docker Compose 進行容器管理
 
-## 執行
-#### Git clone 
+## 建立容器
+### Git clone 
 ```bash
 git clone https://github.com/Avery320/ROS_docker_GUI.git
 ```
-#### Docker Build
-```bash
-docker build -t hiwinros_dev .
-```
-#### Docker Compose
-本專案使用`docker compose`的方式管理容器。
-```bash
-cd docker_compose/dev # 進入 docker_compose 目錄中的 dev 資料夾
-```
-```bash
-docker-compose -f docker-compose.yml up -d # 啟動容器
-```
-- 透過`.env`管理容器的設定檔。
-- 使用`.devcontariner`允許開發者可以透過 IDE 的 `reopen to container` 的方式進入容器。
+### Docker Build
+參考：[Docker Build](./dockerfile/README.md)
+### Dokcer Compose
+參考：[Docker Compose](./docker_compose/sample/README.md)
 
+## VSCode 遠端開發
+在 `docker_compose/sample/` 中以設置 `.devcontariner` 允許開發者可以透過 VSCode 的 `reopen to container` 的方式進入容器。
+```bash
+cd docker_compose/sample/
+code .
+```
 ## VNC/noVNC
 - VNC客戶端：localhost:5901 (密碼：ros000)
 - 瀏覽器：http://localhost:8080/vnc.html
 ---
-## 系統套件 (ros_desktop_base)
-### 桌面環境
+## 系統套件 
+### ros_desktop_base
+這是一個基於 Ubuntu 20.04 的桌面環境映像檔，提供完整的圖形化介面支援：
+#### 桌面環境
 - `ubuntu-mate-desktop` - Ubuntu MATE 桌面環境
 - `tigervnc-standalone-server` - VNC 伺服器
 - `noVNC` - 網頁版 VNC 客戶端
 - `supervisor` - 進程管理工具
 
-### 開發工具
+#### 開發工具
 - `vscodium` - 開源版 VS Code
 - `build-essential` - 編譯工具
 - `vim`, `git`, `sudo` - 基本工具
@@ -54,13 +52,15 @@ docker-compose -f docker-compose.yml up -d # 啟動容器
 - `wget`, `curl` - 網路工具
 - `terminator` - 終端機
 
-## ROS 套件 (ros_core)
-### ROS 核心
+### ros_core
+基於 ros_desktop_base 的 ROS 開發環境映像檔，提供完整的 ROS 開發工具：
+
+#### ROS 核心
 - `ros-noetic-desktop` - ROS 桌面版本，包含基本開發工具
 - `python3-ros*` - ROS 開發工具集（安裝、依賴管理、工作空間工具等）
 - `rosdep` - ROS 套件依賴管理工具
 
-### Gazebo 模擬器
+#### Gazebo 模擬器
 - `ros-noetic-gazebo-ros-pkgs` - Gazebo ROS 整合套件
 - `ros-noetic-gazebo-ros-control` - Gazebo 控制介面
 - `ros-noetic-gazebo-plugins` - Gazebo 插件集
@@ -69,7 +69,7 @@ docker-compose -f docker-compose.yml up -d # 啟動容器
 - `ros-noetic-gazebo-ros` - Gazebo ROS 介面
 
 ## Workspace
-- 容器內已預先配置好ROS工作空間，位於`/home/ROS/workspace/`。
+- 容器內已預先配置好ROS工作空間，會將`workspace`資料夾中的內容映射至容器中`/home/ROS/workspace/`。
 - 目前添加作者所需的開發腳本 Hiwin robot dependencies 於`workspace/dev_setup/hiwin_robot_setup`。
 您可以添加自己的ROS包於`/home/ROS/workspace/`。
 
