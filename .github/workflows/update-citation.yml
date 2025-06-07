@@ -22,8 +22,8 @@ jobs:
 
       - name: Update CITATION.cff
         run: |
-          # Get the latest release version
-          VERSION=$(echo ${{ github.event.release.tag_name }} | sed 's/^v//')
+          # Get the latest release version and remove 'version' prefix if present
+          VERSION=$(echo ${{ github.event.release.tag_name }} | sed 's/^version//')
           
           # Update version and date in CITATION.cff
           sed -i "s/version: .*/version: $VERSION/" CITATION.cff
