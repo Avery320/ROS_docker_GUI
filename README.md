@@ -1,6 +1,6 @@
 # ROS Docker Version2.0
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Docker](https://img.shields.io/badge/Docker-?logo=docker)](https://www.docker.com)
+[![Docker](https://img.shields.io/badge/Docker-greenlogo=docker)](https://www.docker.com)
 [![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-orange?logo=ubuntu)](https://releases.ubuntu.com/20.04/)
 [![ROS](https://img.shields.io/badge/ROS-Noetic-blueviolet?logo=ros)](http://wiki.ros.org/noetic)
 [![VNC](https://img.shields.io/badge/VNC-Enabled-green?logo=vnc)](https://www.tigervnc.org/)
@@ -22,7 +22,7 @@ git clone https://github.com/Avery320/ROS_docker_GUI.git
 ### Docker Build
 參考：[Docker Build](./dockerfile/README.md)
 ### Dokcer Compose
-參考：[Docker Compose](./docker_compose/sample/README.md)
+參考：[Docker Compose](./docker_compose/README.md)
 
 ## VSCode 遠端開發
 在 `docker_compose/sample/` 中以設置 `.devcontariner` 允許開發者可以透過 VSCode 的 `reopen to container` 的方式進入容器。
