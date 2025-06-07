@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software in your research, please cite it as follows:"
+authors:
+  - family-names: "Avery"
+    given-names: "Cheng-En Tsai"
+title: "ROS_docker_GUI: A Docker-based ROS Development Environment"
+version: 2.0.0
+date-released: 2025-06-08
+url: "https://github.com/Avery320/ROS_docker_GUI"
+repository-code: "https://github.com/Avery320/ROS_docker_GUI"
+license: "GPL-3.0"
+keywords:
+  - "ROS"
+  - "Docker"
+  - "Robotics"
+  - "Robot Operating System"
+  - "Development Environment"
+  - "Ubuntu"
+  - "VNC"
+  - "VSCode"
+  - "Container"
+  - "Open Source" 
