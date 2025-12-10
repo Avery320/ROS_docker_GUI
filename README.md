@@ -71,6 +71,15 @@ code .
 ## Workspace
 - 容器內已預先配置好ROS工作空間，會將`workspace`資料夾中的內容映射至容器中`/home/ROS/workspace/`。
 - 目前添加作者所需的開發腳本 Hiwin robot dependencies 於`workspace/dev_setup/hiwin_robot_setup`。
+
+
+## 編譯要使用
+```
+catkin_make_isolated
+
+source devel_isolated/setup.bash
+
+```
 您可以添加自己的ROS包於`/home/ROS/workspace/`。
 
 ## 授權條款
